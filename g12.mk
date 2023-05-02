@@ -4,6 +4,20 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# A/B
+AB_OTA_UPDATER := true
+
+AB_OTA_PARTITIONS += \
+    boot \
+    dtbo \
+    odm \
+    product \
+    system \
+    system_ext \
+    vbmeta \
+    vbmeta_system \
+    vendor
+
 ## Attestation
 PRODUCT_COPY_FILES +=  \
     frameworks/native/data/etc/android.hardware.device_unique_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.device_unique_attestation.xml \
@@ -133,7 +147,7 @@ PRODUCT_PACKAGES += \
     android.hardware.power-V2-ndk_platform.vendor
 
 ## Shipping API
-PRODUCT_SHIPPING_API_LEVEL := 29
+PRODUCT_SHIPPING_API_LEVEL := 30
 
 ## Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
@@ -142,6 +156,20 @@ PRODUCT_SOONG_NAMESPACES += \
 ## Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0.vendor
+
+# Update engine
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_engine_sideload \
+    update_verifier \
+    android.hardware.boot@1.2 \
+    android.hardware.boot@1.2.vendor
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
+
+PRODUCT_PACKAGES += \
+    libhardware.recovery
 
 ## USB
 PRODUCT_PACKAGES += \
