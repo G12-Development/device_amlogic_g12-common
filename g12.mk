@@ -163,8 +163,8 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
     update_verifier \
-    android.hardware.boot@1.2 \
-    android.hardware.boot@1.2.vendor
+    android.hardware.boot@1.1 \
+    android.hardware.boot@1.1.vendor
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
