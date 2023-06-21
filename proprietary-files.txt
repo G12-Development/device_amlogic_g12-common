@@ -91,6 +91,12 @@ vendor/lib/libmeson_display_service.so
 vendor/lib/libvideotunnel.so
 vendor/lib/vendor.amlogic.display.meson_display_ipc@1.0.so
 
+# Dolby
+odm/etc/ms12/libdolbyms12.so
+vendor/bin/dolby_fw_dolbyms12
+vendor/etc/init/dolby_fw_dolbyms12.rc
+vendor/lib/modules/aml_chcon.ko
+
 # Droidlogic
 -vendor/framework/droidlogic.software.core.jar
 vendor/etc/permissions/droidlogic.software.core.xml
@@ -197,6 +203,8 @@ vendor/lib/libomx_clock_utils_alt.so
 vendor/lib/libomx_framework_alt.so
 vendor/lib/libomx_timed_task_queue_alt.so
 vendor/lib/libomx_worker_peer_alt.so
+vendor/lib/libstagefright_soft_amsoftdec.so
+vendor/lib/libthreadworker_alt.so
 vendor/lib/libstagefrighthw.so
 vendor/lib/libthreadworker_alt.so
 
@@ -250,9 +258,41 @@ vendor/lib/vendor.amlogic.hardware.systemcontrol@1.0.so
 vendor/lib/vendor.amlogic.hardware.systemcontrol@1.1.so
 vendor/lib/vendor.amlogic.hardware.tvserver@1.0.so
 
-# TEE-supplicant - form vim1s
+# screencontrol
+vendor/etc/init/screencontrol.rc
+vendor/bin/screencontrol
+-vendor/etc/vintf/manifest/vendor.amlogic.hardware.screencontrol@1.0.xml
+vendor/lib/libscreencontrol_jni.so
+vendor/lib/libscreencontrolclient.so
+vendor/lib/libscreencontrolservice.so
+vendor/lib/vendor.amlogic.hardware.screencontrol@1.0.so
+vendor/bin/screencatch
+vendor/bin/tspacktest
+vendor/bin/videomediaconvertortest
+
+# subtitleserver
+vendor/bin/hw/subtitleserver
+-vendor/etc/vintf/manifest/vendor.amlogic.hardware.subtitleserver@1.0.xml
+vendor/lib/vendor.amlogic.hardware.subtitleserver@1.0.so
+system_ext/lib/vendor.amlogic.hardware.subtitleserver@1.0.so
+vendor/etc/init/subtitleserver.rc
+system_ext/lib/libsubtitlebinder.so
+vendor/lib/libsubtitlebinder.so
+vendor/lib/libsubtitlemanager_jni.so
+system_ext/lib/libsubtitlemanager_jni.so
+
+vendor/lib/libvendorfont.so
+vendor/lib/libSubtitleClient.so
+system_ext/lib/libSubtitleClient.so
+
+# TEE-tz
+# playready
+vendor/lib/teetz/9a04f079-9840-4286-ab92-e65be0885f95.ta
+
+# TEEloader
 vendor/lib/libtee_load_video_fw.so
 vendor/lib/libteec.so
+vendor/lib/libsecmem.so
 vendor/bin/tee-supplicant
 vendor/bin/tee_preload_fw
 vendor/etc/init/tee-supplicant.rc
