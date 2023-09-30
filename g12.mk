@@ -75,15 +75,34 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg
+
 ## Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1.vendor
 
+# HIDL
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder \
+    libhwbinder.vendor
+
 # Init-Files
+ifneq ($(TARGET_USES_LEGACY_PARTITIONS),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init-files/fstab.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic \
     $(LOCAL_PATH)/init-files/fstab.amlogic:$(TARGET_COPY_OUT_RAMDISK)/fstab.amlogic \
-    $(LOCAL_PATH)/init-files/fstab.amlogic:$(TARGET_COPY_OUT_RAMDISK)/first_stage_ramdisk/fstab.amlogic \
+    $(LOCAL_PATH)/init-files/fstab.amlogic:$(TARGET_COPY_OUT_RAMDISK)/first_stage_ramdisk/fstab.amlogic
+else
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/init-files/fstab-legacy.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic \
+    $(LOCAL_PATH)/init-files/fstab-legacy.amlogic:$(TARGET_COPY_OUT_RAMDISK)/fstab.amlogic \
+    $(LOCAL_PATH)/init-files/fstab-legacy.amlogic:$(TARGET_COPY_OUT_RAMDISK)/first_stage_ramdisk/fstab.amlogic
+endif
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init-files/init.amlogic.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc \
     $(LOCAL_PATH)/init-files/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc \
     $(LOCAL_PATH)/init-files/init.amlogic.media.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.media.rc \
@@ -123,8 +142,10 @@ endif
 PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0.vendor
 
+ifneq ($(TARGET_USES_LEGACY_PARTITIONS),true)
 ## Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+endif
 
 ## Platform
 TARGET_AMLOGIC_SOC ?= g12a
@@ -147,6 +168,10 @@ PRODUCT_PACKAGES += \
 ## USB
 PRODUCT_PACKAGES += \
     android.hardware.usb.gadget@1.2.vendor
+
+# VNDK
+PRODUCT_PACKAGES += \
+    libutils-v32
 
 ## Inherit from the main common tree product makefile
 $(call inherit-product, device/amlogic/common/amlogic.mk)

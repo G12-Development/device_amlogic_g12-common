@@ -67,6 +67,16 @@ function blob_fixup() {
         vendor/etc/init/tee-supplicant.rc)
              sed -i s#/vendor/lib/#/vendor/lib/modules/#g "${2}"
              ;;
+        vendor/bin/systemcontrol)
+             "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
+             ;;
+        vendor/bin/hdmicecd)
+             "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
+             ;;
+        vendor/lib/hw/audio.primary.amlogic.so)
+             "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
+             ;;
+
      esac
  }
 
